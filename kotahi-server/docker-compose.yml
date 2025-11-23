@@ -16,7 +16,7 @@ services:
     networks:
       - video-player-network
 
-  app:
+  backend:
     build: .
     container_name: video-player-backend
     restart: unless-stopped
@@ -31,6 +31,22 @@ services:
       - vtt_uploads:/app/uploads/vtt
     depends_on:
       - mongodb
+    networks:
+      - video-player-network
+
+  frontend:
+    build: ../kotahi-app
+    container_name: video-player-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:8080
+      NEXT_PUBLIC_POSTHOG_KEY: ${POSTHOG_KEY}
+      NEXT_PUBLIC_POSTHOG_HOST: ${POSTHOG_HOST:-https://app.posthog.com}
+      NEXT_PUBLIC_SITE_URL: ${SITE_URL:-http://localhost:3000}
+    depends_on:
+      - backend
     networks:
       - video-player-network
 

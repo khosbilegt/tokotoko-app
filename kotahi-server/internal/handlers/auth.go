@@ -100,12 +100,14 @@ func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	user, err := h.userRepo.GetByEmail(ctx, req.Email)
 	if err != nil {
+		log.Printf("AUTH: Failed login attempt for email: %s (user not found)", req.Email)
 		errors.WriteErrorResponse(w, errors.ErrInvalidCredentials)
 		return
 	}
 
 	// Check password
 	if !user.CheckPassword(req.Password) {
+		log.Printf("AUTH: Failed login attempt for email: %s (invalid password)", req.Email)
 		errors.WriteErrorResponse(w, errors.ErrInvalidCredentials)
 		return
 	}
