@@ -113,7 +113,7 @@ export default function WatchListPage() {
   const getProgressColor = (progress: number) => {
     if (progress >= 90) return "bg-green-500";
     if (progress >= 50) return "bg-yellow-500";
-    return "bg-blue-500";
+    return "bg-primary";
   };
 
   if (isLoading) {

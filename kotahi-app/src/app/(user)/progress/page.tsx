@@ -302,7 +302,7 @@ function ProgressPage() {
             <CardHeader>
               <CardTitle>Outside hours</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 lg:flex-1 lg:flex lg:flex-col lg:justify-between">
+            <CardContent className="space-y-4 lg:flex-1 lg:flex lg:flex-col lg:justify-center lg:items-center text-center">
               <div className="text-lg">
                 <span className="text-primary">{outsideHours}</span>{" "}
                 <span className="text-muted-foreground">
@@ -320,7 +320,7 @@ function ProgressPage() {
             <CardHeader>
               <CardTitle>Statistics</CardTitle>
             </CardHeader>
-            <CardContent className="lg:flex-1 lg:flex lg:flex-col lg:justify-center">
+            <CardContent className="lg:flex-1 lg:flex lg:flex-col lg:justify-center lg:items-center text-center">
               <div className="text-lg">
                 <span className="font-semibold">
                   {progressData.totalMinutes}

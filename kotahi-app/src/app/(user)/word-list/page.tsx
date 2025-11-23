@@ -559,7 +559,7 @@ export default function LearningListPage() {
                   </CardHeader>
                   <CardContent>
                     {isLoadingSearch ? (
-                      <div className="space-y-4">
+                      <div className="space-y-4 max-h-[600px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                           {[...Array(3)].map((_, i) => (
                             <div key={i} className="animate-pulse">
@@ -590,69 +590,71 @@ export default function LearningListPage() {
                         </p>
                       </div>
                     ) : (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {vocabularySearchData?.results &&
-                          vocabularySearchData?.results[0]?.occurrences.map(
-                            (result: VocabularyIndex) => (
-                              <div
-                                key={result.id}
-                                className="group rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md dark:hover:shadow-lg transition-all duration-200 hover:border-primary/20"
-                              >
-                                <div className="aspect-video bg-gray-100 dark:bg-gray-800 relative overflow-hidden">
-                                  {result?.video.thumbnail ? (
-                                    <img
-                                      src={result?.video.thumbnail}
-                                      alt={result?.video.title}
-                                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                                    />
-                                  ) : (
-                                    <div className="w-full h-full flex items-center justify-center">
-                                      <Play className="w-8 h-8 text-gray-400" />
+                      <div className="max-h-[600px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pr-2">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                          {vocabularySearchData?.results &&
+                            vocabularySearchData?.results[0]?.occurrences.map(
+                              (result: VocabularyIndex) => (
+                                <div
+                                  key={result.id}
+                                  className="group rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md dark:hover:shadow-lg transition-all duration-200 hover:border-primary/20"
+                                >
+                                  <div className="aspect-video bg-gray-100 dark:bg-gray-800 relative overflow-hidden">
+                                    {result?.video.thumbnail ? (
+                                      <img
+                                        src={result?.video.thumbnail}
+                                        alt={result?.video.title}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                                      />
+                                    ) : (
+                                      <div className="w-full h-full flex items-center justify-center">
+                                        <Play className="w-8 h-8 text-gray-400" />
+                                      </div>
+                                    )}
+                                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-200 flex items-center justify-center">
+                                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                        <Button
+                                          size="sm"
+                                          className="rounded-full bg-white/90 hover:bg-white text-gray-900 shadow-lg"
+                                          asChild
+                                        >
+                                          <Link
+                                            href={`/watch/${result?.video.id}?t=${result?.start_time}`}
+                                          >
+                                            <Play className="w-4 h-4" />
+                                          </Link>
+                                        </Button>
+                                      </div>
                                     </div>
-                                  )}
-                                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-200 flex items-center justify-center">
-                                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                  </div>
+                                  <div className="p-4 space-y-3">
+                                    <h3 className="font-medium text-sm line-clamp-2 text-gray-900 dark:text-gray-100">
+                                      {result?.video.title}
+                                    </h3>
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
+                                        {formatTime(result?.start_time)} -{" "}
+                                        {formatTime(result?.end_time)}
+                                      </span>
                                       <Button
                                         size="sm"
-                                        className="rounded-full bg-white/90 hover:bg-white text-gray-900 shadow-lg"
+                                        variant="outline"
+                                        className="text-xs h-7 px-3"
                                         asChild
                                       >
                                         <Link
                                           href={`/watch/${result?.video.id}?t=${result?.start_time}`}
                                         >
-                                          <Play className="w-4 h-4" />
+                                          <Play className="w-3 h-3 mr-1" />
+                                          Watch
                                         </Link>
                                       </Button>
                                     </div>
                                   </div>
                                 </div>
-                                <div className="p-4 space-y-3">
-                                  <h3 className="font-medium text-sm line-clamp-2 text-gray-900 dark:text-gray-100">
-                                    {result?.video.title}
-                                  </h3>
-                                  <div className="flex items-center justify-between">
-                                    <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
-                                      {formatTime(result?.start_time)} -{" "}
-                                      {formatTime(result?.end_time)}
-                                    </span>
-                                    <Button
-                                      size="sm"
-                                      variant="outline"
-                                      className="text-xs h-7 px-3"
-                                      asChild
-                                    >
-                                      <Link
-                                        href={`/watch/${result?.video.id}?t=${result?.start_time}`}
-                                      >
-                                        <Play className="w-3 h-3 mr-1" />
-                                        Watch
-                                      </Link>
-                                    </Button>
-                                  </div>
-                                </div>
-                              </div>
-                            )
-                          )}
+                              )
+                            )}
+                        </div>
                       </div>
                     )}
                   </CardContent>
