@@ -23,7 +23,6 @@ export function PracticeCard({
   vocabulary,
   onAnswer,
   isAnswered,
-  result,
 }: PracticeCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 

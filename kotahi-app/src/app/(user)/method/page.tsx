@@ -245,7 +245,8 @@ export default function MethodPage() {
                   <span>
                     <span className="font-mono">wh</span> often sounds like f;{" "}
                     <span className="font-mono">r</span> is a tap;{" "}
-                    <span className="font-mono">ng</span> as in "singer".
+                    <span className="font-mono">ng</span> as in
+                    &ldquo;singer&rdquo;.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
