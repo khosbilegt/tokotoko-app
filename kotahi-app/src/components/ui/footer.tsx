@@ -41,7 +41,7 @@ export function Footer({ className }: FooterProps) {
               </li>
               <li>
                 <Link
-                  href="/vocabulary"
+                  href="/word-list"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Vocabulary
