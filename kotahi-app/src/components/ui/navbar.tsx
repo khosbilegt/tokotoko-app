@@ -68,7 +68,7 @@ export function Navbar({ className }: NavbarProps) {
   return (
     <nav
       className={cn(
-        "border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
+        "sticky top-0 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
         className
       )}
     >
@@ -87,10 +87,10 @@ export function Navbar({ className }: NavbarProps) {
           </div>
 
           {/* User Actions */}
-          <div className="flex items-center space-x-4 z-50">
+          <div className="flex items-center space-x-4 relative z-50">
             <ThemeToggleDropdown />
             {user ? (
-              <div className="relative user-dropdown z-50">
+              <div className="relative user-dropdown z-[100]">
                 <Button
                   variant="ghost"
                   size="sm"
@@ -105,7 +105,7 @@ export function Navbar({ className }: NavbarProps) {
 
                 {/* User Dropdown Menu */}
                 <div
-                  className={`absolute right-0 mt-2 w-48 bg-popover border border-border rounded-md shadow-lg transition-all duration-200 z-50 ${
+                  className={`absolute right-0 mt-2 w-48 bg-popover border border-border rounded-md shadow-lg transition-all duration-200 z-[100] ${
                     isUserDropdownOpen
                       ? "opacity-100 visible"
                       : "opacity-0 invisible"

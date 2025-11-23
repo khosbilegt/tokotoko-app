@@ -90,32 +90,36 @@ function ProgressPage() {
         </div>
 
         {/* Streak Card */}
-        <Card className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border-yellow-200 dark:border-yellow-800">
+        <Card className="bg-gradient-to-r from-amber-100/80 to-orange-100/80 dark:from-yellow-900/20 dark:to-orange-900/20 border-amber-300 dark:border-yellow-800 shadow-sm">
           <CardHeader>
             <div className="flex items-center gap-2">
-              <Sparkles className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
-              <CardTitle>Current Streak</CardTitle>
+              <Sparkles className="h-6 w-6 text-amber-700 dark:text-yellow-400" />
+              <CardTitle className="text-amber-900 dark:text-yellow-100">
+                Current Streak
+              </CardTitle>
             </div>
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
-              <span className="text-5xl font-bold text-yellow-600 dark:text-yellow-400">
+              <span className="text-5xl font-bold text-amber-700 dark:text-yellow-400">
                 {progressData.currentStreak}
               </span>
-              <span className="text-muted-foreground">days</span>
+              <span className="text-amber-800 dark:text-muted-foreground">
+                days
+              </span>
             </div>
             {progressData.currentStreak > 0 && (
-              <p className="text-sm text-muted-foreground mt-2">
+              <p className="text-sm text-amber-800 dark:text-muted-foreground mt-2">
                 Keep it up! You&apos;re on fire 🔥
               </p>
             )}
             {progressData.currentStreak === 0 && (
-              <p className="text-sm text-muted-foreground mt-2">
+              <p className="text-sm text-amber-800 dark:text-muted-foreground mt-2">
                 Start your streak today!
               </p>
             )}
             <div className="mt-4">
-              <div className="flex justify-between text-sm mb-1">
+              <div className="flex justify-between text-sm mb-1 text-amber-900 dark:text-foreground">
                 <span>Longest streak</span>
                 <span className="font-semibold">
                   {progressData.longestStreak} days
