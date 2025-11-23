@@ -4,16 +4,7 @@ import { useGetUserProgressQuery } from "@/lib/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import {
-  Zap,
-  TrendingUp,
-  Clock,
-  Trophy,
-  Calendar as CalendarIcon,
-  Award,
-  Target,
-  Play,
-} from "lucide-react";
+import { Zap } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 // Level thresholds in hours
