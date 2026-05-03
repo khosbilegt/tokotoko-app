@@ -6,7 +6,7 @@
 *.dylib
 video-player-backend
 video-player-backend_unix
-internal/config/config.go
+# internal/config/config.go
 
 # Test binary, built with `go test -c`
 *.test

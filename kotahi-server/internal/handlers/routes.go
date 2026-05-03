@@ -42,6 +42,12 @@ func SetupRoutes(cfg *config.Config, db *database.MongoDB, videoRepo database.Vi
 	feedbackHandler := NewFeedbackHandler(emailService)
 	contactHandler := NewContactHandler(emailService)
 
+	// Public VTT file downloads (no auth). Must be registered on the root router
+	// before the /api/v1 subrouter so these requests are not delegated only to api
+	// (where blank-prefix protected/admin routes are registered ahead of uploads).
+	r.PathPrefix("/api/v1/uploads/vtt/").Handler(
+		http.StripPrefix("/api/v1/uploads/vtt/", http.FileServer(http.Dir("./uploads/vtt/"))))
+
 	// API routes
 	api := r.PathPrefix("/api/v1").Subrouter()
 
@@ -128,9 +134,6 @@ func SetupRoutes(cfg *config.Config, db *database.MongoDB, videoRepo database.Vi
 
 	// Admin email test route
 	admin.HandleFunc("/email/test", feedbackHandler.TestEmail).Methods("POST")
-
-	// Static file serving for uploaded VTT files
-	api.PathPrefix("/uploads/vtt/").Handler(http.StripPrefix("/api/v1/uploads/vtt/", http.FileServer(http.Dir("./uploads/vtt/"))))
 
 	// Health check endpoint
 	r.HandleFunc("/health", healthCheck).Methods("GET")
