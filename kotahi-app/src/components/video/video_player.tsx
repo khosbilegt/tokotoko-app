@@ -27,7 +27,7 @@ const VideoPlayer = forwardRef<VideoPlayerRef, VideoPlayerProps>(
       initialTime = 0,
       videoId,
     },
-    ref
+    ref,
   ) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const trackElementRef = useRef<HTMLTrackElement | null>(null);
@@ -166,7 +166,7 @@ const VideoPlayer = forwardRef<VideoPlayerRef, VideoPlayerProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
 VideoPlayer.displayName = "VideoPlayer";

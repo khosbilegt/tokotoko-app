@@ -47,9 +47,10 @@ function VideoTranscription({
     }
   }, 1000);
   const learningTexts = React.useMemo(() => {
-    const items = (learningListData as any)?.data || learningListData || [];
+    const raw = learningListData?.data;
+    const items = Array.isArray(raw) ? raw : [];
     return new Set<string>(
-      items.map((i: any) => (i.text ? String(i.text).toLowerCase() : ""))
+      items.map((i) => (i.text ? String(i.text).toLowerCase() : "")),
     );
   }, [learningListData]);
 
@@ -72,7 +73,7 @@ function VideoTranscription({
       // Use lookarounds to avoid partial matches inside other words.
       const pattern = new RegExp(
         `(?<!\\\p{L})${escapedWord}(?!\\\p{L})`,
-        "giu"
+        "giu",
       );
 
       let match: RegExpExecArray | null;
@@ -112,7 +113,7 @@ function VideoTranscription({
   // Render text with vocabulary highlights
   const renderTextWithVocabulary = (
     text: string,
-    vocabularies: Vocabulary[]
+    vocabularies: Vocabulary[],
   ) => {
     if (!vocabularies.length) return text;
 
@@ -131,7 +132,7 @@ function VideoTranscription({
       // Add the vocabulary button
       const vocabText = text.slice(match.start, match.end);
       const isInLearningList = learningTexts.has(
-        match.vocabulary.maori?.toLowerCase?.() || vocabText.toLowerCase()
+        match.vocabulary.maori?.toLowerCase?.() || vocabText.toLowerCase(),
       );
 
       parts.push(
@@ -146,7 +147,7 @@ function VideoTranscription({
                 // Track vocabulary click when the word is clicked
                 trackVocabClick(
                   match.vocabulary.id || match.vocabulary.maori,
-                  videoId
+                  videoId,
                 );
               }}
             >
@@ -164,7 +165,7 @@ function VideoTranscription({
                     // Track vocabulary mark as unknown (adding to learning list)
                     trackVocabMarkUnknown(
                       match.vocabulary.id || match.vocabulary.maori,
-                      videoId
+                      videoId,
                     );
 
                     await createItem({
@@ -173,11 +174,11 @@ function VideoTranscription({
                       notes: "",
                     });
                     toast.success(
-                      `Added "${match.vocabulary.maori}" to learning list`
+                      `Added "${match.vocabulary.maori}" to learning list`,
                     );
                   } catch (error) {
                     toast.error(
-                      `Failed to add "${match.vocabulary.maori}" to learning list`
+                      `Failed to add "${match.vocabulary.maori}" to learning list`,
                     );
                     console.error("Error adding to learning list:", error);
                   }
@@ -191,7 +192,7 @@ function VideoTranscription({
               {match.vocabulary.description}
             </p>
           </PopoverContent>
-        </Popover>
+        </Popover>,
       );
 
       lastIndex = match.end;
@@ -210,12 +211,12 @@ function VideoTranscription({
     if (!transcript.length || !containerRef.current) return;
 
     const currentItem = transcript.find(
-      (item) => currentTime >= item.startTime && currentTime <= item.endTime
+      (item) => currentTime >= item.startTime && currentTime <= item.endTime,
     );
 
     if (currentItem) {
       const itemIndex = transcript.findIndex(
-        (item) => item.id === currentItem.id
+        (item) => item.id === currentItem.id,
       );
       const itemElement = itemRefs.current.get(itemIndex);
 

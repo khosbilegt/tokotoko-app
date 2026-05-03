@@ -35,7 +35,7 @@ function WatchPage() {
 
   const { data: watchHistoryData } = useWatchHistoryByVideo(
     token,
-    videoId as string
+    videoId as string,
   );
   const { createOrUpdate } = useWatchHistoryMutations();
   const { trackVideoStart, trackVideoComplete } = useLearningAnalytics();
@@ -68,7 +68,7 @@ function WatchPage() {
         const transcriptData = await loadVTTTranscript(
           video.subtitle,
           // process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080"
-          process.env.NEXT_PUBLIC_API_BASE_URL || "https://tokotoko.app"
+          process.env.NEXT_PUBLIC_API_BASE_URL || "https://tokotoko.app",
         );
         setTranscript(transcriptData);
       } catch (error) {

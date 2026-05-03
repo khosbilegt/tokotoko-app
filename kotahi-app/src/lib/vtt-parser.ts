@@ -80,7 +80,7 @@ export function parseVTT(vttContent: string): TranscriptItem[] {
 // Fetch and parse VTT file
 export async function loadVTTTranscript(
   vttUrl: string,
-  apiBaseUrl: string
+  apiBaseUrl: string,
 ): Promise<TranscriptItem[]> {
   try {
     const response = await fetch(apiBaseUrl + vttUrl);
